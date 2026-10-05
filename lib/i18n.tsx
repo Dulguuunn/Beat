@@ -16,7 +16,7 @@ const DEFAULT_LOCALE: Locale = 'mn'
 
 // ---------------------------------------------------------------------------
 // Translation dictionaries. Both locales MUST share the same shape.
-// Music terms (genre, key, BPM) and proper nouns are intentionally left as-is.
+// Music terms (artist1, key, artist2) and proper nouns are intentionally left as-is.
 // ---------------------------------------------------------------------------
 const messages = {
   en: {
@@ -276,6 +276,8 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   // Restore the saved preference after mount (avoids hydration mismatch).
   useEffect(() => {
     const saved = window.localStorage.getItem(STORAGE_KEY) as Locale | null
+    // The browser-only preference is restored after hydration intentionally.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (saved === 'en' || saved === 'mn') setLocaleState(saved)
   }, [])
 

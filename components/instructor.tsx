@@ -1,15 +1,17 @@
+'use client'
+
 import Image from 'next/image'
 import { Disc3, Cpu, GraduationCap, Quote } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import { useI18n } from '@/lib/i18n'
 
-const stats = [
-  { icon: Disc3, value: '50+', label: 'Beats Produced' },
-  { icon: Cpu, value: 'FL & Ableton', label: 'Native Workflow' },
-  { icon: GraduationCap, value: '100%', label: 'Beginner Friendly' },
-]
+const statIcons = [Disc3, Cpu, GraduationCap]
+const statValues = ['50+', 'FL & Ableton', '100%']
 
 export function Instructor() {
+  const { t } = useI18n()
+
   return (
     <section id="instructor" className="scroll-mt-24 py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-4">
@@ -27,18 +29,16 @@ export function Instructor() {
 
           <div className="flex flex-col justify-center p-6 md:p-10">
             <p className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-neon-cyan">
-              Your Instructor
+              {t.instructor.eyebrow}
             </p>
             <h2 className="font-display text-2xl font-bold tracking-tight text-balance md:text-3xl">
-              Learn from a producer who started exactly where you are.
+              {t.instructor.heading}
             </h2>
 
             <div className="mt-5 flex items-start gap-3 rounded-xl border border-border bg-background/40 p-4">
               <Quote className="size-5 shrink-0 text-neon-magenta" />
               <p className="text-sm leading-relaxed text-muted-foreground">
-                &ldquo;I taught myself on a laptop with zero theory. This course is the
-                shortcut I wish I&apos;d had — no fluff, just the exact steps to your first
-                finished beat.&rdquo;
+                {t.instructor.quote}
               </p>
             </div>
 
@@ -47,27 +47,27 @@ export function Instructor() {
                 JV
               </span>
               <div>
-                <p className="font-display font-semibold">Jordan Vega</p>
+                <p className="font-display font-semibold">{t.instructor.name}</p>
                 <Badge variant="outline" className="border-border text-muted-foreground">
-                  Producer & Sound Designer
+                  {t.instructor.role}
                 </Badge>
               </div>
             </div>
 
             <div className="mt-8 grid grid-cols-3 gap-3">
-              {stats.map((s) => {
-                const Icon = s.icon
+              {t.instructor.stats.map((label, i) => {
+                const Icon = statIcons[i]
                 return (
                   <div
-                    key={s.label}
+                    key={i}
                     className="rounded-xl border border-border bg-background/40 p-3 text-center"
                   >
                     <Icon className="mx-auto mb-2 size-4 text-neon-cyan" />
                     <div className="font-display text-base font-bold leading-tight text-balance">
-                      {s.value}
+                      {statValues[i]}
                     </div>
                     <div className="mt-0.5 text-[11px] leading-tight text-muted-foreground">
-                      {s.label}
+                      {label}
                     </div>
                   </div>
                 )

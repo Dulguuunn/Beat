@@ -1,8 +1,13 @@
+'use client'
+
 import Image from 'next/image'
 import { Play, Headphones, ArrowRight, Disc3 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { useI18n } from '@/lib/i18n'
 
 export function Hero() {
+  const { t } = useI18n()
+
   return (
     <section id="top" className="relative min-h-[100svh] w-full overflow-hidden">
       {/* Full-bleed background image (swap /hero-bg.png for your own) */}
@@ -24,21 +29,19 @@ export function Hero() {
         <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-start">
           <div>
             <p className="mb-6 font-mono text-xs uppercase tracking-[0.25em] text-muted-foreground">
-              Where beginners become producers
+              {t.hero.eyebrow}
             </p>
             <h1 className="font-display text-6xl font-extrabold uppercase leading-[0.9] tracking-tight text-balance sm:text-7xl md:text-8xl">
-              From Zero
+              {t.hero.title1}
               <br />
-              To Your
+              {t.hero.title2}
               <br />
-              <span className="text-muted-foreground">First Beat.</span>
+              <span className="text-muted-foreground">{t.hero.title3}</span>
             </h1>
           </div>
 
           <p className="max-w-xs text-base leading-relaxed text-muted-foreground text-pretty lg:justify-self-end lg:pt-28">
-            Master your DAW, program punchy rhythms, and turn raw ideas into
-            finished, radio-ready tracks with clear, step-by-step guidance built
-            for total beginners.
+            {t.hero.paragraph}
           </p>
         </div>
 
@@ -51,7 +54,7 @@ export function Hero() {
               className="h-12 rounded-full bg-foreground px-6 text-base font-semibold text-background hover:bg-foreground/90"
               render={<a href="#pricing" />}
             >
-              Enroll in the Course
+              {t.hero.enroll}
               <ArrowRight className="size-4" />
             </Button>
             <Button
@@ -62,22 +65,22 @@ export function Hero() {
               render={<a href="#beats" />}
             >
               <Headphones className="size-4" />
-              Listen to Beat Demos
+              {t.hero.listen}
             </Button>
           </div>
 
           {/* Glass stat card */}
           <div className="glass relative w-full max-w-xs overflow-hidden rounded-2xl border border-border p-6 sm:w-64">
             <Disc3 className="animate-spin-slow absolute right-4 top-4 size-6 text-muted-foreground" />
-            <p className="font-display text-5xl font-extrabold tracking-tight">50+</p>
+            <p className="font-display text-5xl font-extrabold tracking-tight">{t.hero.statValue}</p>
             <p className="mt-2 text-xs uppercase tracking-[0.15em] text-muted-foreground">
-              Beats produced
+              {t.hero.statLabel1}
               <br />
-              in the course
+              {t.hero.statLabel2}
             </p>
             <div className="mt-4 border-t border-border pt-3">
               <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-muted-foreground">
-                4 Core Modules
+                {t.hero.modules}
               </p>
             </div>
           </div>

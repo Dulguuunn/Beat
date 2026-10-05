@@ -4,16 +4,18 @@ import { useState } from 'react'
 import { AudioWaveform, Menu, X, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-
-const links = [
-  { label: 'Curriculum', href: '#curriculum' },
-  { label: 'Beat Previews', href: '#beats' },
-  { label: 'Instructor', href: '#instructor' },
-  { label: 'Pricing', href: '#pricing' },
-]
+import { useI18n } from '@/lib/i18n'
 
 export function SiteNav() {
   const [open, setOpen] = useState(false)
+  const { t, toggle, locale } = useI18n()
+
+  const links = [
+    { label: t.nav.curriculum, href: '#curriculum' },
+    { label: t.nav.beats, href: '#beats' },
+    { label: t.nav.instructor, href: '#instructor' },
+    { label: t.nav.pricing, href: '#pricing' },
+  ]
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
@@ -41,14 +43,22 @@ export function SiteNav() {
             ))}
           </ul>
 
-          <div className="hidden md:block">
+          <div className="hidden items-center gap-2 md:flex">
+            {/* Language toggle */}
+            <button
+              onClick={toggle}
+              className="rounded-lg border border-border px-2.5 py-1.5 font-mono text-xs text-muted-foreground transition-colors hover:border-neon-cyan/40 hover:text-neon-cyan"
+              aria-label="Switch language"
+            >
+              {locale === 'mn' ? 'EN' : 'МН'}
+            </button>
             <Button
               size="lg"
               nativeButton={false}
               className="bg-neon-cyan text-primary-foreground shadow-glow-cyan hover:bg-neon-cyan/90"
               render={<a href="#pricing" />}
             >
-              Get Started
+              {t.nav.getStarted}
               <ArrowRight className="size-4" />
             </Button>
           </div>
@@ -81,13 +91,19 @@ export function SiteNav() {
                 </a>
               </li>
             ))}
-            <li className="p-1">
+            <li className="flex items-center gap-2 p-1">
+              <button
+                onClick={toggle}
+                className="rounded-lg border border-border px-2.5 py-1.5 font-mono text-xs text-muted-foreground transition-colors hover:border-neon-cyan/40 hover:text-neon-cyan"
+              >
+                {locale === 'mn' ? 'EN' : 'МН'}
+              </button>
               <Button
                 nativeButton={false}
-                className="w-full bg-neon-cyan text-primary-foreground hover:bg-neon-cyan/90"
+                className="flex-1 bg-neon-cyan text-primary-foreground hover:bg-neon-cyan/90"
                 render={<a href="#pricing" onClick={() => setOpen(false)} />}
               >
-                Get Started
+                {t.nav.getStarted}
               </Button>
             </li>
           </ul>

@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { AudioWaveform, Video, Camera, Cloud, ArrowRight, Check } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import { useI18n } from '@/lib/i18n'
 
 const socials = [
   { label: 'YouTube', icon: Video, href: '#' },
@@ -14,6 +15,7 @@ const socials = [
 export function SiteFooter() {
   const [email, setEmail] = useState('')
   const [joined, setJoined] = useState(false)
+  const { t } = useI18n()
 
   function onSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -36,8 +38,7 @@ export function SiteFooter() {
               </span>
             </a>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              The beginner beat-making course that takes you from your first
-              project file to a finished, release-ready track.
+              {t.footer.brandDesc}
             </p>
             <div className="mt-5 flex gap-2">
               {socials.map((s) => {
@@ -57,9 +58,9 @@ export function SiteFooter() {
           </div>
 
           <div className="md:justify-self-end md:text-right">
-            <h3 className="font-display text-base font-semibold">Join the waitlist</h3>
+            <h3 className="font-display text-base font-semibold">{t.footer.joinWaitlist}</h3>
             <p className="mt-2 text-sm text-muted-foreground">
-              Get a free drum kit and early access to new lessons.
+              {t.footer.waitlistDesc}
             </p>
             <form onSubmit={onSubmit} className="mt-4 flex max-w-sm gap-2 md:ml-auto">
               <Input
@@ -67,7 +68,7 @@ export function SiteFooter() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@email.com"
+                placeholder={t.footer.emailPlaceholder}
                 aria-label="Email address"
                 className="h-11 flex-1 bg-background/40"
               />
@@ -77,21 +78,21 @@ export function SiteFooter() {
                 className="h-11 shrink-0 bg-neon-cyan text-primary-foreground hover:bg-neon-cyan/90"
               >
                 {joined ? <Check className="size-4" /> : <ArrowRight className="size-4" />}
-                <span className="sr-only md:not-sr-only">{joined ? 'Joined' : 'Join'}</span>
+                <span className="sr-only md:not-sr-only">{joined ? t.footer.joined : t.footer.join}</span>
               </Button>
             </form>
             {joined && (
-              <p className="mt-2 text-xs text-neon-cyan">You&apos;re on the list — check your inbox!</p>
+              <p className="mt-2 text-xs text-neon-cyan">{t.footer.joinedMsg}</p>
             )}
           </div>
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row">
-          <p>© {new Date().getFullYear()} PULSE Beat Academy. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} PULSE Beat Academy. {t.footer.rights}</p>
           <div className="flex gap-5">
-            <a href="#" className="transition-colors hover:text-foreground">Privacy</a>
-            <a href="#" className="transition-colors hover:text-foreground">Terms</a>
-            <a href="#" className="transition-colors hover:text-foreground">Contact</a>
+            <a href="#" className="transition-colors hover:text-foreground">{t.footer.privacy}</a>
+            <a href="#" className="transition-colors hover:text-foreground">{t.footer.terms}</a>
+            <a href="#" className="transition-colors hover:text-foreground">{t.footer.contact}</a>
           </div>
         </div>
       </div>
